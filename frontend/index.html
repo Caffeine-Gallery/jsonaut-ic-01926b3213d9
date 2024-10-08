@@ -2,27 +2,27 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width">
     <title>JSON Path Accessor</title>
-    <link rel="stylesheet" href="index.css">
+    <base href="/">
+    <link type="text/css" rel="stylesheet" href="main.css" />
 </head>
 <body>
-    <div id="app">
+    <main>
         <h1>JSON Path Accessor</h1>
-        <textarea id="jsonInput" rows="10" cols="50" placeholder="Enter JSON here"></textarea>
-        <button id="setJSON">Set JSON</button>
-        <input id="pathInput" type="text" placeholder="Enter JSON path (e.g., person.name)">
-        <button id="accessPath">Access Path</button>
+        <form id="jsonForm">
+            <label for="jsonInput">Enter JSON:</label>
+            <textarea id="jsonInput" rows="10" cols="50"></textarea>
+            <button type="submit">Set JSON</button>
+        </form>
+        <form id="pathForm">
+            <label for="pathInput">Enter JSON Path:</label>
+            <input type="text" id="pathInput">
+            <button type="submit">Access Path</button>
+        </form>
         <div id="result"></div>
-        <h2>Example Queries:</h2>
-        <ul>
-            <li><code>person.name</code></li>
-            <li><code>person.age</code></li>
-            <li><code>person.address.city</code></li>
-            <li><code>person.hobbies.0</code></li>
-            <li><code>person.education.1.degree</code></li>
-        </ul>
-    </div>
-    <script type="module" src="index.js"></script>
+        <button id="getStoredJSON">Get Stored JSON</button>
+        <div id="storedJSON"></div>
+    </main>
 </body>
 </html>

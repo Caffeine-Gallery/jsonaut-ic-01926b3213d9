@@ -25,7 +25,13 @@ actor {
   stable var jsonText : Text = "";
 
   public func setJSON(json : Text) : async () {
-    jsonText := json;
+    let cleanedJson = Text.map(json, func (c : Char) : Char {
+      if (c == '\n' or c == '\r' or c == '\t') { ' ' }
+      else if (c == '\\') { '\\' }
+      else if (c == '\"') { '\"' }
+      else { c }
+    });
+    jsonText := cleanedJson;
   };
 
   public query func getJSON() : async Text {
@@ -133,7 +139,7 @@ actor {
             case (?(_, value)) { 
               current := value;
             };
-            case (null) { throw Error.reject("Path not found: " # path) };
+            case (null) { return "Path not found: " # path };
           };
         };
         case (#Array(arr)) {
@@ -142,13 +148,13 @@ actor {
               if (index < arr.size()) {
                 current := arr[index];
               } else {
-                throw Error.reject("Array index out of bounds: " # path);
+                return "Array index out of bounds: " # path;
               };
             };
-            case (null) { throw Error.reject("Invalid array index: " # path) };
+            case (null) { return "Invalid array index: " # path };
           };
         };
-        case _ { throw Error.reject("Cannot access property of non-object/non-array: " # path) };
+        case _ { return "Cannot access property of non-object/non-array: " # path };
       };
     };
 

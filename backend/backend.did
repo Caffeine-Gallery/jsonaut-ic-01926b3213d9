@@ -1,0 +1,5 @@
+service : {
+  accessJSONPath: (text) -> (text) query;
+  getJSON: () -> (text) query;
+  setJSON: (text) -> ();
+}

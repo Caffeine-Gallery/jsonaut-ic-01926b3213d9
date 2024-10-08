@@ -32,6 +32,9 @@ actor {
       else { c }
     });
     jsonText := cleanedJson;
+    if (Text.size(jsonText) == 0) {
+      jsonText := "{\"name\":\"John Doe\",\"age\":30,\"address\":{\"street\":\"123 Main St\",\"city\":\"Anytown\"},\"hobbies\":[\"reading\",\"swimming\"]}";
+    };
   };
 
   public query func getJSON() : async Text {
@@ -124,6 +127,7 @@ actor {
   };
 
   public query func accessJSONPath(path : Text) : async Text {
+    Debug.print("Accessing path: " # path);
     let parsedJSON = switch (parseJSON(jsonText)) {
       case (null) { return "Invalid JSON" };
       case (?value) { value };
@@ -133,6 +137,7 @@ actor {
     var current = parsedJSON;
 
     for (part in pathParts.vals()) {
+      Debug.print("Processing part: " # part);
       switch (current) {
         case (#Object(obj)) {
           switch (Array.find(obj, func((k, _) : (Text, JSON)) : Bool { k == part })) {
@@ -158,6 +163,7 @@ actor {
       };
     };
 
+    Debug.print("Final value type: " # debug_show(current));
     switch (current) {
       case (#String(s)) { s };
       case (#Number(n)) { Float.toText(n) };

@@ -7,6 +7,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       await backend.setJSON(json);
       document.getElementById("result").innerText = "JSON set successfully";
+      updateStoredJSON();
     } catch (error) {
       console.error("Error setting JSON:", error);
       document.getElementById("result").innerText = `Error: ${error.message || 'Unknown error occurred'}`;
@@ -25,16 +26,21 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   });
 
-  document.getElementById("getStoredJSON").addEventListener("click", async () => {
-    try {
-      const storedJSON = await backend.getJSON();
-      document.getElementById("storedJSON").innerText = storedJSON;
-    } catch (error) {
-      console.error("Error getting stored JSON:", error);
-      document.getElementById("storedJSON").innerText = `Error: ${error.message || 'Unknown error occurred'}`;
-    }
-  });
+  document.getElementById("getStoredJSON").addEventListener("click", updateStoredJSON);
+
+  // Initialize with default JSON
+  updateStoredJSON();
 });
+
+async function updateStoredJSON() {
+  try {
+    const storedJSON = await backend.getJSON();
+    document.getElementById("storedJSON").innerText = storedJSON;
+  } catch (error) {
+    console.error("Error getting stored JSON:", error);
+    document.getElementById("storedJSON").innerText = `Error: ${error.message || 'Unknown error occurred'}`;
+  }
+}
 
 window.onerror = function(message, source, lineno, colno, error) {
   console.error("Global error:", message, source, lineno, colno, error);

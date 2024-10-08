@@ -11,7 +11,7 @@
     <main>
         <h1>JSON Path Accessor</h1>
         <form id="jsonForm">
-            <label for="jsonInput">Enter JSON:</label>
+            <label for="jsonInput">Enter JSON (or leave empty for default):</label>
             <textarea id="jsonInput" rows="10" cols="50"></textarea>
             <button type="submit">Set JSON</button>
         </form>
@@ -21,12 +21,13 @@
             <button type="submit">Access Path</button>
         </form>
         <div id="result"></div>
-        <button id="getStoredJSON">Get Stored JSON</button>
+        <h2>Stored JSON:</h2>
         <div id="storedJSON"></div>
+        <button id="getStoredJSON">Refresh Stored JSON</button>
         <div id="instructions">
             <h2>Instructions</h2>
             <p>To access a specific JSON path, use dot notation for objects and bracket notation for arrays.</p>
-            <p>Example JSON structure:</p>
+            <p>Default JSON structure:</p>
             <pre>
 {
   "name": "John Doe",

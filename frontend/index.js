@@ -5,9 +5,13 @@ document.addEventListener('DOMContentLoaded', () => {
     e.preventDefault();
     const json = document.getElementById("jsonInput").value;
     try {
-      await backend.setJSON(json);
-      document.getElementById("result").innerText = "JSON set successfully";
-      updateStoredJSON();
+      const result = await backend.setJSON(json);
+      if ('ok' in result) {
+        document.getElementById("result").innerText = "JSON set successfully";
+        updateStoredJSON();
+      } else {
+        document.getElementById("result").innerText = `Error: ${result.err}`;
+      }
     } catch (error) {
       console.error("Error setting JSON:", error);
       document.getElementById("result").innerText = `Error: ${error.message || 'Unknown error occurred'}`;
@@ -19,7 +23,11 @@ document.addEventListener('DOMContentLoaded', () => {
     const path = document.getElementById("pathInput").value;
     try {
       const result = await backend.accessJSONPath(path);
-      document.getElementById("result").innerText = `Result: ${result}`;
+      if ('ok' in result) {
+        document.getElementById("result").innerText = `Result: ${result.ok}`;
+      } else {
+        document.getElementById("result").innerText = `Error: ${result.err}`;
+      }
     } catch (error) {
       console.error("Error accessing JSON path:", error);
       document.getElementById("result").innerText = `Error: ${error.message || 'Unknown error occurred'}`;

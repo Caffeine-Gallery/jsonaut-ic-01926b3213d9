@@ -1,16 +1,13 @@
 import Int "mo:base/Int";
-import Nat32 "mo:base/Nat32";
 
 import Text "mo:base/Text";
-import Debug "mo:base/Debug";
-import Error "mo:base/Error";
 import Iter "mo:base/Iter";
 import Array "mo:base/Array";
 import Float "mo:base/Float";
 import Bool "mo:base/Bool";
 import Nat "mo:base/Nat";
+import Nat32 "mo:base/Nat32";
 import Char "mo:base/Char";
-import Option "mo:base/Option";
 import Result "mo:base/Result";
 
 actor {

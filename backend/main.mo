@@ -125,7 +125,7 @@ actor {
 
   public query func accessJSONPath(path : Text) : async Text {
     let parsedJSON = switch (parseJSON(jsonText)) {
-      case (null) { throw Error.reject("Invalid JSON") };
+      case (null) { return "Invalid JSON" };
       case (?value) { value };
     };
 

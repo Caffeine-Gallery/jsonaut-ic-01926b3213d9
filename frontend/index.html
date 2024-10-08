@@ -23,6 +23,31 @@
         <div id="result"></div>
         <button id="getStoredJSON">Get Stored JSON</button>
         <div id="storedJSON"></div>
+        <div id="instructions">
+            <h2>Instructions</h2>
+            <p>To access a specific JSON path, use dot notation for objects and bracket notation for arrays.</p>
+            <p>Example JSON structure:</p>
+            <pre>
+{
+  "name": "John Doe",
+  "age": 30,
+  "address": {
+    "street": "123 Main St",
+    "city": "Anytown"
+  },
+  "hobbies": ["reading", "swimming"]
+}
+            </pre>
+            <p>Example paths:</p>
+            <ul>
+                <li>name</li>
+                <li>age</li>
+                <li>address.street</li>
+                <li>address.city</li>
+                <li>hobbies.0</li>
+                <li>hobbies.1</li>
+            </ul>
+        </div>
     </main>
     <script type="module" src="index.js"></script>
 </body>
